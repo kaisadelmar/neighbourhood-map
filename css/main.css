@@ -1,0 +1,29 @@
+
+body {
+	color: #337ab7;
+}
+
+.jumbotron {
+	text-align: center;
+}
+
+#list {
+	border: 3px solid #FFA500;
+	font-size: 15px;
+	font-weight: bold;
+	list-style: none;
+	padding: 10px;
+}
+
+.input-group {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	padding: 15px 0 15px 0;
+}
+
+#map-canvas {
+	height: 400px;
+	width: 900px;
+	border: 3px solid #FFA500;
+}
