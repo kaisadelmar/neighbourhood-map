@@ -89,14 +89,10 @@ function googleError() {
       url: locationItem.wikiUrl,
       dataType: 'jsonp',
       success: function(data) {
-        infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>'
-          + '<p>' + data[2] + '</p>'
-          + '</div>'
-          );
+        infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>' + '<p>' + data[2] + '</p>' + '</div>');
         locationItem.content = infoWindowContent;
         return(infoWindowContent)
       },
-      //Display error message if Wikipedia fails to load
       error: function(data) {
           infoWindowContent = ('<div>' + '<p>' + 'There was an error loading Wikipedia' + '</p>' + '</div>');
           locationItem.content = infoWindowContent;
