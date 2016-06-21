@@ -1,4 +1,4 @@
-//Set current location and initialize map with Google Maps API
+///Set current location and initialize map with Google Maps API
 function initMap() {
 
   var currentLocation = {lat: 45.5013382, lng: -73.5556981};
@@ -83,24 +83,24 @@ function googleError() {
   //Get content for infowindows
   function displayContent(locationItem) {
 
-  var contentString;
+  var infoWindowContent;
     //Wikipedia API AJAX request
     $.ajax({
       url: locationItem.wikiUrl,
       dataType: 'jsonp',
       success: function(data) {
-        contentString = ('<div>' +  '<p>' + data[0] + '</p>'
+        infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>'
           + '<p>' + data[2] + '</p>'
           + '</div>'
           );
-        locationItem.content = contentString;
-        return(contentString)
+        locationItem.content = infoWindowContent;
+        return(infoWindowContent)
       },
       //Display error message if Wikipedia fails to load
       error: function(data) {
-          contentString = ('<div>' + '<p>' + 'There was an error loading Wikipedia' + '</p>' + '</div>');
-          locationItem.content = contentString;
-          return(contentString)
+          infoWindowContent = ('<div>' + '<p>' + 'There was an error loading Wikipedia' + '</p>' + '</div>');
+          locationItem.content = infoWindowContent;
+          return(infoWindowContent)
       }
     });
 }
@@ -118,20 +118,20 @@ function googleError() {
   locationItem.marker = new google.maps.Marker(markerOptions);
 
     //Define content for each infowindow
-    var contentString = displayContent(locationItem);
-    locationItem.content = contentString;
+    var infoWindowContent = displayContent(locationItem);
+    locationItem.content = infoWindowContent;
 
 
-  //Set up event listeners for each location
-  locationItem.marker.addListener('click', (function(markerRef, contentString) {
+  //Set up event listeners for each location for clicks
+  locationItem.marker.addListener('click', (function(markerRef, infoWindowContent) {
     return function() {
     infowindow.setContent(locationItem.content);
-    infowindow.open(map, markerRef);
-  }
-  })(locationItem.marker,locationItem.content));
+    infowindow.open(map, markerRef);}
+  })
+  (locationItem.marker,locationItem.content));
 
-   //Push locations
-   self.locationsList.push(new Location(locationItem) );
+    //Push new location items to the locations array
+    self.locationsList.push(new Location(locationItem) );
 });
 
 
@@ -142,7 +142,6 @@ function googleError() {
     google.maps.event.trigger(locationItem.marker, 'click');
   }
 
-
   //Copy values of locations to be stored in observabale array
   self.filteredList = ko.observableArray([]);
 
@@ -150,7 +149,6 @@ function googleError() {
   locations.forEach(function (locationItem) {
     self.filteredList.push(new Location(locationItem) );
   });
-
 
   //Store user's input
   self.query = ko.observable('');
