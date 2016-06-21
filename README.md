@@ -1,6 +1,6 @@
-**Neighbourhood Map Project (P5) for Udacity Front End Web Develompent Nanodegree**
+##Neighbourhood Map Project (P5) for Udacity Front End Web Develompent Nanodegree##
 
-**Project overview**
+##Project overview##
 
 This project uses JavaScript, jQuery, knockoutJS, AJAX, Google Maps API, and Wikipedia API to create an interactive map of sightseeing locations in Montreal, Canada.
 ______________________________________
