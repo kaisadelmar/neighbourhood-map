@@ -1,14 +1,12 @@
 ///Set current location and initialize map with Google Maps API
-var map;
-
 function initMap() {
 
-  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
   var currentLocation = {lat: 45.5013382, lng: -73.5556981};
   var mapOptions = {
     center: currentLocation,
     zoom: 11,
   };
+  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
   ko.applyBindings(new viewModel() );
 
@@ -70,7 +68,7 @@ function viewModel() {
 
 //Display error message if Google Maps fails to load
 function googleError() {
-  document.getElementById("map").innerHTML = "There was an error loading Google Maps.";
+  document.getElementById("map").innerHTML = "There was an error loading Google Maps."
 };
 
   //Construct locations
@@ -86,6 +84,8 @@ function googleError() {
   function displayContent(locationItem) {
 
   var infoWindowContent;
+
+
     //Wikipedia API AJAX request
     $.ajax({
       url: locationItem.wikiUrl,
@@ -95,10 +95,8 @@ function googleError() {
         locationItem.content = infoWindowContent;
         return(infoWindowContent)
       },
-      error: function(data) {
-          infoWindowContent = ('<div>' + '<p>' + 'There was an error loading Wikipedia' + '</p>' + '</div>');
-          locationItem.content = infoWindowContent;
-          return(infoWindowContent)
+      error: function() {
+        infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>' + '<p>' + data[2] + '</p>' + '</div>');
       }
     });
 };
@@ -125,7 +123,7 @@ function googleError() {
     return function() {
     infowindow.setContent(locationItem.content);
     infowindow.open(map, markerRef);}
-  };)
+  })
   (locationItem.marker,locationItem.content));
 
     //Push new location items to the locations array
