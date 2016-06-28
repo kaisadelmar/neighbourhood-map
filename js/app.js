@@ -71,7 +71,7 @@ function viewModel() {
 //Display error message if Google Maps fails to load
 function googleError() {
   document.getElementById("map").innerHTML = "There was an error loading Google Maps.";
-  }
+};
 
   //Construct locations
   var Location = function(data) {
@@ -80,7 +80,7 @@ function googleError() {
     this.wikiUrl = data.wikiUrl;
     this.content = data.content;
     this.latlng = data.latlng;
-  }
+  };
 
   //Get content for infowindows
   function displayContent(locationItem) {
@@ -101,7 +101,7 @@ function googleError() {
           return(infoWindowContent)
       }
     });
-}
+};
 
   //Create list of locations from the Model
   locations.forEach(function(locationItem) {
@@ -125,7 +125,7 @@ function googleError() {
     return function() {
     infowindow.setContent(locationItem.content);
     infowindow.open(map, markerRef);}
-  })
+  };)
   (locationItem.marker,locationItem.content));
 
     //Push new location items to the locations array
@@ -138,7 +138,7 @@ function googleError() {
     locationItem.marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout( function() { locationItem.marker.setAnimation(null); }, 1500);
     google.maps.event.trigger(locationItem.marker, 'click');
-  }
+  };
 
   //Copy values of locations to be stored in observabale array
   self.filteredList = ko.observableArray([]);
