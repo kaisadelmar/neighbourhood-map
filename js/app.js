@@ -1,3 +1,5 @@
+
+
 ///Set current location and initialize map with Google Maps API
 function initMap() {
 
@@ -83,8 +85,12 @@ function googleError() {
   //Get content for infowindows
   function displayContent(locationItem) {
 
-  var infoWindowContent;
+    var infoWindowContent;
 
+    //Create setTimeout() function for failed requests
+    var wikiRequestTimeout = setTimeout(function() {
+        alert('Wikipedia articles could not be loaded at this time');
+    }, 7000);
 
     //Wikipedia API AJAX request
     $.ajax({
@@ -94,12 +100,12 @@ function googleError() {
         infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>' + '<p>' + data[2] + '</p>' + '</div>');
         locationItem.content = infoWindowContent;
         return(infoWindowContent)
-      },
-      error: function() {
-        infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>' + '<p>' + data[2] + '</p>' + '</div>');
       }
+
     });
+    clearTimeout(wikiRequestTimeout);
 };
+
 
   //Create list of locations from the Model
   locations.forEach(function(locationItem) {
@@ -118,9 +124,12 @@ function googleError() {
     locationItem.content = infoWindowContent;
 
 
-  //Set up event listeners for each location for clicks
+  //Set up event listeners and animate the marker and open the infowindow when location on the list is clicked
   locationItem.marker.addListener('click', (function(markerRef, infoWindowContent) {
+
     return function() {
+    locationItem.marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout( function() { locationItem.marker.setAnimation(null); }, 1500);
     infowindow.setContent(locationItem.content);
     infowindow.open(map, markerRef);}
   })
@@ -131,10 +140,8 @@ function googleError() {
 });
 
 
-  //Animate the marker and open the infowindow when location on the list is clicked
+  //Set markers for click events
   self.setMarker = function(locationItem) {
-    locationItem.marker.setAnimation(google.maps.Animation.BOUNCE);
-    setTimeout( function() { locationItem.marker.setAnimation(null); }, 1500);
     google.maps.event.trigger(locationItem.marker, 'click');
   };
 

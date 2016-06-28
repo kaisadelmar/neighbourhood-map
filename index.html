@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width initial-scale=1">
@@ -12,23 +12,23 @@
     <div class="jumbotron" class="col-md-12">
     <h3>Sightseeing in Montreal, Quebec</h3></div>
       <div class="row">
-  	     <div id="map-holder" class="col-md-12">
- 	         <div class="col-md-2">
-             <div class="list-group" data-bind="foreach: filteredList()">
-               <ul id="list">
-                 <li>
-                   <a href="#" class="list-group-item active" data-bind="text: name, click: $root.setMarker"></a>
-                 </li>
-                </ul>
-              </div>
-              <div class="input-group">
-                <span class="input-group-addon" id="addon">Search for sights</span>
-                <input class="form-control" aria-describedby="addon" data-bind="textInput: query, event: {keyup: filteringFunction}"/>
-              </div>
- 	      </div>
-	     <div id="map-canvas" class="img-responsive col-md-10"></div>
-          </div>
+  	    <div id="map-holder" class="col-md-12">
+ 	        <div class="col-md-2">
+            <div class="list-group" data-bind="foreach: filteredList()">
+              <ul id="list">
+                <li>
+                  <a href="#" class="list-group-item active" data-bind="text: name, click: $root.setMarker"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon" id="addon">Search for sights</span>
+              <input class="form-control" aria-describedby="addon" data-bind="textInput: query, event: {keyup: filteringFunction}"/>
+            </div>
+ 	        </div>
+	        <div id="map-canvas" class="img-responsive col-md-10"></div>
         </div>
+      </div>
     </div>
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/knockout.js"></script>
