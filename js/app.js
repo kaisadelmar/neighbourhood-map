@@ -1,12 +1,14 @@
 ///Set current location and initialize map with Google Maps API
+var map;
+
 function initMap() {
 
+  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
   var currentLocation = {lat: 45.5013382, lng: -73.5556981};
   var mapOptions = {
     center: currentLocation,
     zoom: 11,
-  }
-  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+  };
 
   ko.applyBindings(new viewModel() );
 
