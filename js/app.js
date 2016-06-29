@@ -100,11 +100,11 @@ function viewModel() {
       success: function(data) {
         infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>' + '<p>' + data[2] + '</p>' + '</div>');
         locationItem.content = infoWindowContent;
-        return(infoWindowContent)
         clearTimeout(wikiRequestTimeout);
+        return(infoWindowContent)
       }
     });
-  }
+  };
 
 
   //Create list of locations from the Model
