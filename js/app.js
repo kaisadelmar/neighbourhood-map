@@ -1,6 +1,6 @@
 
+//Set current location and initialize map with Google Maps API
 
-///Set current location and initialize map with Google Maps API
 function initMap() {
 
   var currentLocation = {lat: 45.5013382, lng: -73.5556981};
@@ -12,7 +12,12 @@ function initMap() {
 
   ko.applyBindings(new viewModel() );
 
-};
+}
+
+//Display error message if Google Maps fails to load
+function googleError() {
+  document.getElementById("map-canvas").innerHTML = "There was an error loading Google Maps.";
+}
 
 //Set up ViewModel
 function viewModel() {
@@ -68,11 +73,6 @@ function viewModel() {
     }
   ];
 
-//Display error message if Google Maps fails to load
-function googleError() {
-  document.getElementById("map").innerHTML = "There was an error loading Google Maps."
-};
-
   //Construct locations
   var Location = function(data) {
     this.name = data.name;
@@ -93,6 +93,7 @@ function googleError() {
     }, 7000);
 
     //Wikipedia API AJAX request
+
     $.ajax({
       url: locationItem.wikiUrl,
       dataType: 'jsonp',
@@ -100,11 +101,10 @@ function googleError() {
         infoWindowContent = ('<div>' +  '<p>' + data[0] + '</p>' + '<p>' + data[2] + '</p>' + '</div>');
         locationItem.content = infoWindowContent;
         return(infoWindowContent)
+        clearTimeout(wikiRequestTimeout);
       }
-
     });
-    clearTimeout(wikiRequestTimeout);
-};
+  }
 
 
   //Create list of locations from the Model
@@ -131,13 +131,14 @@ function googleError() {
     locationItem.marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout( function() { locationItem.marker.setAnimation(null); }, 1500);
     infowindow.setContent(locationItem.content);
-    infowindow.open(map, markerRef);}
+    infowindow.open(map, markerRef);
+    };
   })
   (locationItem.marker,locationItem.content));
 
     //Push new location items to the locations array
     self.locationsList.push(new Location(locationItem) );
-});
+  });
 
 
   //Set markers for click events
@@ -176,7 +177,6 @@ function googleError() {
           locations.marker.setVisible(true);
       });
 
-
   };
 
-};
+}
